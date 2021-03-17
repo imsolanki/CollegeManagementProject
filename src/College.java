@@ -3,10 +3,10 @@ import java.util.ArrayList;
 public class College {
 
     String address;
-    
+
     String collegeName;
 
-    ArrayList<Student> studentList= new ArrayList<>();
+    public ArrayList<Student> studentList= new ArrayList<>();
     //Student stu;
 
 
@@ -21,12 +21,11 @@ public class College {
 
         //System.out.println(studentList);
         for(int i =0; i<studentList.size();i++){
-           Student s= studentList.get(i);
+           Student s= studentList.get(i);  //getting student object individually
            s.printDetails();
-
         }
     }
-
+    //student type method
     Student searchStudent(String name){
         for(int i=0;i<studentList.size();i++){
             if(studentList.get(i).name.equals(name)){
