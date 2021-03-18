@@ -38,8 +38,8 @@ public class mainClass {
         catch(IllegalArgumentException e){
             System.out.println("No user found.");
         }*/
-        Scanner sc =new Scanner(System.in);
-        System.out.println("1 for save and  2 for load!");
+
+        /*System.out.println("1 for save and  2 for load!");
         int input=sc.nextInt();
         sc.nextLine();
         Student s;
@@ -54,8 +54,39 @@ public class mainClass {
             Student student =Student.loadFromFile("D:\\collegeInfo.txt");
             student.printDetails();
 
-        }
+        }*/
+        Scanner sc= new Scanner(System.in);
 
+        int input=sc.nextInt();
+        sc.nextLine();
+        College c =College.loadFromFile();
+        //College col =new College();
+        if(c==null){
+            c=new College();
+            System.out.println("Please enter the name of the college:");
+            c.collegeName=sc.nextLine();
+            //sc.nextLine();
+            c.saveToFile();
+            System.out.println("College details saved to database.");
+        }
+        if(input==1){
+            c.printingDetail();
+        }
+        else if(input==2){
+            System.out.println("Enter name of the student: ");
+            String name =sc.nextLine();
+            System.out.println("Enter age:");
+            int age =sc.nextInt();
+            sc.nextLine();
+            char gpa =sc.nextLine().charAt(0);
+            Student s =new Student(name,age,gpa);
+
+            c.addStudent(s);
+            c.saveToFile();
+            System.out.println("Students added!");
+
+
+        }
 
 
 

@@ -37,8 +37,6 @@ public class Student extends Person{
             ObjectInputStream o = new ObjectInputStream(f);
             Object obj =o.readObject();
             o.close();
-            System.out.println();
-            System.out.flush();
             return (Student)obj;
 
         }

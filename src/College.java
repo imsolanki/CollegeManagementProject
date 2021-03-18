@@ -1,9 +1,10 @@
+import java.io.*;
 import java.util.ArrayList;
 
-public class College {
+public class College implements Serializable{
 
     String address;
-
+    final static String DATABASE_FILENAME = "college.db";
     String collegeName;
 
     public ArrayList<Student> studentList= new ArrayList<>();
@@ -18,7 +19,6 @@ public class College {
     void printingDetail(){
 
         System.out.println("Name of the college: "+ collegeName);
-
         //System.out.println(studentList);
         for(int i =0; i<studentList.size();i++){
            Student s= studentList.get(i);  //getting student object individually
@@ -34,6 +34,40 @@ public class College {
             }
         }
         throw new IllegalArgumentException();
+    }
+
+    /**
+     * @return
+     */
+    boolean saveToFile(){
+        try{
+            FileOutputStream f =new FileOutputStream(DATABASE_FILENAME,false);
+            ObjectOutputStream o = new ObjectOutputStream(f);
+            //ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            o.writeObject(this);
+            o.close();
+            return true;
+        }catch(IOException e){
+            e.printStackTrace();
+            System.out.println("File not created.");
+        }
+        return false;
+    }
+    static College loadFromFile(){
+        try{
+            FileInputStream f = new FileInputStream(College.DATABASE_FILENAME);
+            ObjectInputStream o = new ObjectInputStream(f);
+            Object obj =o.readObject();
+            o.close();
+            //System.out.println(DATABASE_FILENAME);
+            return (College) obj;
+
+        }
+        catch(IOException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 
